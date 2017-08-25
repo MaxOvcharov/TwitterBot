@@ -1,5 +1,6 @@
 import time
 import tweepy
+import pprint
 from local_settings import ACCESS_TOKEN, ACCESS_TOKEN_SECRET, CONSUMER_KEY, CONSUMER_SECRET
 
 
@@ -9,11 +10,11 @@ auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 api = tweepy.API(auth)
 
 # Get user name and followers count
-user = api.get_user('twitter')
-print(user.screen_name, user.followers_count)
+user = api.get_user('Twitter')
+print(user.screen_name, user.followers_count, user.id)
 
 # Push new your Twitter status
-# api.update_status('Просто так твит ни о чём!')
+api.update_status('Просто так твит ни о чём!')
 
 # Publish three new tweets
 image_path = '/tmp/'
@@ -29,3 +30,9 @@ for tweet in tweets:
     frm = 'Create new tweet: media_path - {0}, media_name - {1}, tweet_text {2}'
     print(frm.format(image_path, tweet[0], tweet[1]))
     time.sleep(60)
+
+
+public_tweets = api.user_timeline(id="2726425412", count=2)
+for tweet in public_tweets:
+    print(tweet.text, '\t', tweet.id, "\n")
+    pprint.pprint(tweet._json)
