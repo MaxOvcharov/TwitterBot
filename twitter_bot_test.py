@@ -32,7 +32,7 @@ for tweet in tweets:
     time.sleep(60)
 
 
-public_tweets = api.user_timeline(id="2726425412", count=2)
+public_tweets = api.user_timeline(id="783214", count=2)
 for tweet in public_tweets:
     print(tweet.text, '\t', tweet.id, "\n")
     pprint.pprint(tweet._json)
