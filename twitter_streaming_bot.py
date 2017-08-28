@@ -14,9 +14,10 @@ class StdOutListener(StreamListener):
     """
     def on_data(self, data):
         tweet = json.loads(data)
-        pprint.pprint(tweet)
-        print('\n')
-        # print(tweet.get('text'))
+        if (not tweet.retweeted) and ('RT @' not in tweet.text):
+            pprint.pprint(tweet)
+            print('\n')
+            # print(tweet.get('text'))
         return True
 
     def on_error(self, status_code):
@@ -32,4 +33,4 @@ if __name__ == '__main__':
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
     stream = Stream(auth, l)
-    stream.filter(follow=['783214'])
+    stream.filter(follow=['2726425412'])
