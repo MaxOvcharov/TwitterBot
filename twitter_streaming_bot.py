@@ -14,7 +14,7 @@ class StdOutListener(StreamListener):
     """
     def on_data(self, data):
         tweet = json.loads(data)
-        if (not tweet.retweeted) and ('RT @' not in tweet.text):
+        if (not tweet['retweeted']) and ('RT @' not in tweet['text']):
             pprint.pprint(tweet)
             print('\n')
             # print(tweet.get('text'))
